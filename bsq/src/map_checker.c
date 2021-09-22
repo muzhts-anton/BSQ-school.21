@@ -1,6 +1,7 @@
 #include "base_funs.h"
-#include <stdlib.h>
 #include "map.h"
+
+#include <stdlib.h>
 
 int		legend_check(char *legend, int length)
 {
@@ -17,7 +18,7 @@ int		legend_check(char *legend, int length)
 	{
 		if (legend[i] < '0' || legend[i] > '9')
 			return (0);
-		i--;
+		--i;
 	}
 	if (legend[length - 1] == legend[length - 2]
 			|| legend[length - 1] == legend[length - 3]
@@ -35,7 +36,7 @@ int		line_check(char *line, t_map_info *map_info)
 	{
 		if (line[i] != map_info->obstacle_char && line[i] != map_info->empty_char)
 			return (0);
-		i++;
+		++i;
 	}
 	if (i != map_info->fl_length)
 		return (0);

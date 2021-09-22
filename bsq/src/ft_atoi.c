@@ -1,4 +1,4 @@
-int		ignored_space(char s)
+static int		ignored_space(char s)
 {
 	if (s == ' ' || s == '\n' || s == '\t')
 		return (1);
@@ -7,7 +7,7 @@ int		ignored_space(char s)
 	return (0);
 }
 
-int		ft_generate_number(char *str)
+static int		ft_generate_number(char *str)
 {
 	int nr;
 	int i;
@@ -28,23 +28,23 @@ int		ft_generate_number(char *str)
 int		ft_atoi(char *str)
 {
 	int i;
-	int nr;
-	int semn;
+	int nbr;
+	int sign;
 
 	i = 0;
-	nr = 0;
-	semn = 1;
+	nbr = 0;
+	sign = 1;
 	while (ignored_space(str[i]))
-		i++;
+		++i;
 	if (str[i] == '-')
 	{
-		semn = -1;
-		i++;
+		sign = -1;
+		++i;
 	}
 	else if (str[i] == '+')
 		i++;
-	nr = ft_generate_number(str + i);
-	if (nr == -1)
-		return (nr);
-	return (nr * semn);
+	nbr = ft_generate_number(str + i);
+	if (nbr == -1)
+		return (nbr);
+	return (nbr * sign);
 }

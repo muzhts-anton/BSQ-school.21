@@ -1,24 +1,25 @@
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include "map.h"
 #include "input_file_processing.h"
 #include "show_result.h"
 
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+char g_toolmapfilename[] = "tmap.txt";
 
 void	get_input(void)
 {
 	int		ret;
-	char	*buf;
+	char	*buff;
 	int		fd;
 
-	fd = open("./std_input.txt", O_RDWR | O_CREAT, 0644);
-	buf = (char*)malloc(51 * sizeof(char));
-	while ((ret = read(0, buf, 50)))
-		write(fd, buf, ret);
+	fd = open(g_toolmapfilename, O_RDWR | O_CREAT);
+	buff = (char *)malloc(51 * sizeof(char));
+	while ((ret = read(0, buff, 50)))
+		write(fd, buff, ret);
 	close(fd);
-	free(buf);
+	free(buff);
 }
 
 int		file_exists_check(char *file_name)
@@ -37,9 +38,9 @@ void	check_file(char *file_name, int **result, t_map_info *map_info)
 	if (file_exists_check(file_name))
 	{
 		if (calc_file(file_name, result, map_info) == -1)
-			write(2, "map error\n", 10);
+			write(STDERR_FILENO, "map error\n", 10);
 		else if ((*result)[0] == 0)
-			write(2, "map error\n", 10);
+			write(STDERR_FILENO, "map error\n", 10);
 		else
 			show_result(file_name, *result, map_info);
 		if (*result != 0)
@@ -49,7 +50,7 @@ void	check_file(char *file_name, int **result, t_map_info *map_info)
 		}
 	}
 	else
-		write(2, "map error\n", 10);
+		write(STDERR_FILENO, "map error\n", 10);
 }
 
 int		main(int argc, char **argv)
@@ -62,14 +63,11 @@ int		main(int argc, char **argv)
 	i = 1;
 	if (argc > 1)
 		while (i < argc)
-		{
-			check_file(argv[i], &result, &map_info);
-			i++;
-		}
+			check_file(argv[i++], &result, &map_info);
 	else
 	{
 		get_input();
-		check_file("./std_input.txt", &result, &map_info);
+		check_file(g_toolmapfilename, &result, &map_info);
 	}
 	return (0);
 }

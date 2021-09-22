@@ -1,10 +1,11 @@
 #include "map.h"
+#include "base_funs.h"
+
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdlib.h>
-#include "base_funs.h"
 
-void	display_line(int *result, t_map_info *map_info, int i, char *line)
+static void	display_line(int *result, t_map_info *map_info, int i, char *line)
 {
 	int j;
 
@@ -16,7 +17,7 @@ void	display_line(int *result, t_map_info *map_info, int i, char *line)
 			ft_putchar(map_info->full_char);
 		else
 			ft_putchar(line[j]);
-		j++;
+		++j;
 	}
 }
 
@@ -28,7 +29,7 @@ void	show_result(char *file_name, int *result, t_map_info *map_info)
 	int		i;
 
 	i = 0;
-	buf = (char*)malloc(sizeof(char) * (ft_max(map_info->fl_length,
+	buf = (char *)malloc(sizeof(char) * (ft_max(map_info->fl_length,
 					map_info->legend_length) + 2));
 	fd = open(file_name, O_RDONLY);
 	read(fd, buf, map_info->legend_length + 1);
@@ -36,7 +37,7 @@ void	show_result(char *file_name, int *result, t_map_info *map_info)
 	{
 		buf[ret] = '\0';
 		display_line(result, map_info, i, buf);
-		i++;
+		++i;
 	}
 	close(fd);
 	free(buf);
