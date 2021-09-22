@@ -3,10 +3,18 @@ NAME = bsq
 MAPGEN = mapgen
 MAP = map
 
-HDR_DIR = project/include
+HDR_DIR = include
 
 SRC = \
-	project/src/main.c \
+	src/main.c \
+	src/base_funs.c \
+	src/ft_atoi.c \
+	src/input_file_processing.c \
+	src/map_checker.c \
+	src/show_result.c \
+	src/sol_mem.c \
+	src/solution.c \
+
 
 OBJ = $(SRC:.c=.o)
 
@@ -29,4 +37,4 @@ mclean: fclean
 	rm -rf $(MAP)
 
 test: mclean all testmap
-	./$(NAME)
+	./$(NAME) $(MAP)
