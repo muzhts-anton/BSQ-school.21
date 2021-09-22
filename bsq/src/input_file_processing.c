@@ -1,6 +1,5 @@
 #include "map_checker.h"
 #include "solution.h"
-#include "map.h"
 #include "base_funs.h"
 
 #include <unistd.h>

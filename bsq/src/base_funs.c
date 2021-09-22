@@ -1,3 +1,5 @@
+#include "base_funs.h"
+
 #include <unistd.h>
 
 void	ft_putchar(char c)

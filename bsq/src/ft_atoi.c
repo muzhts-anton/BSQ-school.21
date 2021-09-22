@@ -1,3 +1,5 @@
+#include "base_funs.h"
+
 static int		ignored_space(char s)
 {
 	if (s == ' ' || s == '\n' || s == '\t')

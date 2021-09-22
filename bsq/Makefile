@@ -16,6 +16,7 @@ SRC = \
 	src/show_result.c \
 	src/sol_mem.c \
 	src/solution.c \
+	src/utils.c \
 
 
 OBJ = $(SRC:.c=.o)
